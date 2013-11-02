@@ -1,0 +1,71 @@
+# View function
+snippet cff
+	<cffunction name="${1:name}">
+		${2:<!--- body --->}
+	</cffunction>
+	
+snippet cfc
+	<cfcomponent name="${1:name}">
+		<cffunction name="init">
+			<cfreturn this>
+		</cffunction>
+		${2:<!--- body --->}
+	</cfcomponent>
+
+snippet vf
+	<cffunction name="v_${1:name}">
+		<cfoutput>
+		<cfsavecontent variable="local.html">
+			${2:<!--- body --->}
+		</cfsavecontent>
+		</cfoutput>
+		<cfreturn local.html>
+	</cffunction>
+
+snippet cmi
+	<cffunction name="index">
+		<cfset ${1:entities} = model.load('${2:entity}')>
+		<cfreturn render()>
+	</cffunction>
+snippet cmn
+	<cffunction name="new">
+		<cfset ${1:entity} = dataService.getObject('invald_$1',true)>
+		<cfif NOT isObject($1)>
+			<cfset ${1:entity} = model.new('$1')>
+		</cfif>
+		<cfreturn render()>
+	</cffunction>
+snippet cmc
+	<cffunction name="create">
+		<cfargument name="$1" type="struct" required="true">
+		<cfset ${1:entity} = EntityNew('$1').configure(arguments.$1)>
+		<cfif $1.save()>
+			<cfset flash.add('success','$1 Added!')>
+			<cfset redirect_to($1)>
+		<cfelse>
+			<cfset redirect_to($1,'new')>
+		</cfif>
+	</cffunction>
+snippet cme
+	<cffunction name="edit">
+		<cfargument name="id" type="numeric" required="true">
+		<cfset ${1:entity} = dataService.getObject('invalid_$1',true)>
+		<cfif NOT isObject($1)>
+			<cfset $1 = EntityLoadByPK('$1',arguments.id)>
+		</cfif>
+		<cfreturn render()>
+	</cffunction>
+snippet cmu
+	<cffunction name="update">
+		<cfargument name="id" type="numeric" required="true">
+		<cfargument name="$1" type="struct" required="true">
+		<cfset ${1:entity} = EntityLoadByPK('$1',arguments.id).configure(arguments.$1)>
+		<cfif $1.save()>
+			<cfset flash.add('success','$1 updated!')>
+			<cfset redirect_to($1)>
+		<cfelse>
+			<cfset dataService.storeObject('invalid_$1',$1)>
+			<cfset redirect_to('edit',$1)>
+		</cfif>
+	</cffunction>
+
