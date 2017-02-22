@@ -1,0 +1,26 @@
+#controller
+snippet controller
+	angular.module('${1:ModuleName}').controller('${2:ControllerName}Ctrl',[
+		'$scope',
+		function($scope){
+			${3}
+		}
+	]);
+
+#directive
+snippet directive 
+	angular.module('${1:ModuleName}').directive('${2:DirectiveName}',[
+		function(){
+			return {
+				restrict: 'A',
+				link: function(scope,element,attrs){
+					${3}
+				},
+				scope: {
+				},
+				controller: ['$scope',function($scope){
+				}],
+				templateUrl: ''
+			};
+		}
+	]);

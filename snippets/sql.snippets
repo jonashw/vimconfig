@@ -1,0 +1,15 @@
+snippet migrate_to_datetimeoffset
+	/* Migrates the DATETIME ${2:COLUMN_NAME} column in the ${1:TABLE_NAME} table
+	 * from DATETIME to DATETIMEOFFSET.  */
+	ALTER TABLE $1
+	ADD $2_OFFSET DATETIMEOFFSET NOT NULL DEFAULT('2001-01-01T00:00:00Z')
+
+	GO
+
+	UPDATE $1
+	SET $2_OFFSET = TODATETIMEOFFSET($2,'-05:00')
+
+	ALTER TABLE $1
+	DROP COLUMN $2
+
+	EXEC sp_rename '$1.$2_OFFSET', '$2'

@@ -1,8 +1,3 @@
-snippet checkbox
-	<label class="checkbox">
-		<input type="checkbox" ng-model="${2:some.property}">
-		${1:Some Label}
-	</label>
 snippet style
 	<style>
 		${1}
@@ -30,12 +25,6 @@ snippet fa
 	<i class="fa fa-fw fa-${1:info-circle}"></i>
 snippet input
 	<input type="text" ng-model="${1:some.property}" class="form-control">
-snippet radios
-	<label class="radio"
-	ng-repeat="${1:item} in $1s">
-		<input type="radio" ng-model="${2:some.property}}" ng-value="$1">
-		{{$1}}
-	</label>
 snippet select
 	<select class="form-control"
 	ng-options="${1:item} as $1 for $1 in ${2:items}"
@@ -74,13 +63,6 @@ snippet input-group
 	<div class="input-group">
 		<span class="input-group-addon">$</span>
 		<input type="text" class="form-control" ng-model="${1}">
-	</div>
-snippet input-btn-group
-	<div class="input-group">
-		<input type="text" class="form-control" ng-model="${2:model.prop}">
-		<span class="input-group-btn">
-			<button class="btn btn-default" type="button">${1:Search}</button>
-		</span>
 	</div>
 snippet list-group
 	<div class="list-group">
